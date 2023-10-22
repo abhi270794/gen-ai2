@@ -1,24 +1,22 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+// import SkillsPage from './components/SkillsPage';
+import ChatbotPage from './components/ChatbotPage';
+import RegistrationPage from './components/RegistrationPage';
 import './App.css';
+import UserProfile from './components/UserProfile';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-         Team
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="app-container">
+        <Routes>
+          <Route path="/" element={<RegistrationPage/>} />
+          <Route path="/chatbot" element={<ChatbotPage />} />
+          <Route path="/user/:username" element={<UserProfile />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
