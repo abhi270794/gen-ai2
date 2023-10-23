@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import TextField from "@mui/material/TextField";
 import { useNavigate } from 'react-router-dom';
 import './registration.css';
 
@@ -28,8 +29,8 @@ function RegistrationPage() {
     // Replace this with actual server-side registration logic
     // If successful, set success message and save the username
     setSuccessMessage('Registration successful!');
-    sessionStorage.setItem('username', formData.username);
-
+    localStorage.setItem('username', formData.email);
+    localStorage.setItem('password', formData.password);
     // Redirect to the user profile page
     navigate(`/user/${formData.username}`);
   };
@@ -48,6 +49,8 @@ function RegistrationPage() {
             name="username"
             value={formData.username}
             onChange={handleInputChange}
+          style={{width: "95%",padding: "10px", marginBottom:"15px", border: "1px solid #ccc",
+          borderRadius: "5px",outline: "none"}}
             required
           />
         </div>

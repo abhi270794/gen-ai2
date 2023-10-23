@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Alert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
+import "./SignIn"
 import "@fontsource/roboto/300.css";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +18,29 @@ export const SignIn = () => {
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
+
+  const auth=()=>{
+// Retrieve user credentials from local storage
+const storedUserDetails = localStorage.getItem("username");
+const storedUserDetailspassword = localStorage.getItem("password");
+console.log(storedUserDetails)
+if (storedUserDetails&& email === false && password === false) {
+
+console.log(email)
+  if (
+   storedUserDetails === value1 &&
+    storedUserDetailspassword === value && email === false && password === false
+  ) {
+   navigate(`/user/${storedUserDetails}`);
+  } else {
+    // Authentication failed, show an alert
+    alert("No user found, please create an account");
+  }
+} else {
+  // No user details found, show an alert
+  alert("No user found, please create an account");
+}
+  }
   const handleclick = () => {
     if (password === true && value !== "") {
       setFlag(true);
@@ -40,13 +64,13 @@ export const SignIn = () => {
 
     if (email === false && password === false) {
       setShow(true);
-      sessionStorage.setItem('username', value1);
-      navigate(`/user/${value1}`);
-      console.log("email=>", email, "password=>", password, "show=>", show);
+     console.log("email=>", email, "password=>", password, "showbb=>", show);
     }
 
+    auth();
+ 
   };
-
+  
   const handlechange = (e) => {
     const item = e.target.value;
     setValue(item);
@@ -74,6 +98,7 @@ export const SignIn = () => {
   return (
     <>
       <div
+      className="registration-container"
         style={{
           display: "flex",
           textAlign: "center",
@@ -86,15 +111,15 @@ export const SignIn = () => {
             textAlign: "center",
             justifyContent: "center",
             flexDirection: "column",
-            height: "100vh",
-            width: "50vw",
+            // height: "100vh",
+            // width: "50vw",
           }}
         >
-          <Typography variant="h2" style={{ marginBottom: "60px" }}>
-            Log In
+          <Typography variant="h2" style={{ marginBottom: "60px",color:"red" ,fontWeight:"bold" }}>
+            Sign In
           </Typography>
 
-          <TextField
+          <input
             id="outlined-input"
             label="email"
             name="email"
@@ -108,7 +133,7 @@ export const SignIn = () => {
           />
           {emptyemail ? <Alert severity="error">Empty Email</Alert> : ""}
 
-          <TextField
+          <input
             id="outlined-input"
             label="Password"
             name="password"
@@ -126,8 +151,6 @@ export const SignIn = () => {
           {flag1 ? <Alert severity="error">Incorrect Email</Alert> : ""}
 
           {flag ? <Alert severity="error">Incorrect Password</Alert> : ""}
-
-          {show ? <Alert severity="success" id="showSuccessMessage" data-testid="showSuccessMessage">LoggedIn Successfully</Alert> : ""}
 
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Button
